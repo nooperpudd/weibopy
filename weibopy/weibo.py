@@ -1,45 +1,36 @@
 # encoding:utf-8
-from __future__ import absolute_import
-
 import requests
-import json
-import oauthlib
+
 from .exceptions import WeiboAPIError
 
 
 class WeiboClient(object):
     """
+    weibo client base 
     """
     base = "https://api.weibo.com/2/"
 
-    def __init__(self,access_token,):
+    def __init__(self, access_token):
         """
-        
         """
         self.access_token = access_token
         self.session = requests.Session()
 
-    def request(self,method,url, params,data=None):
+    def request(self, method, suffix, params, data=None):
         """
-        :param url: 
-        :param method: 
-        :param params: 
-        :param data: 
+        request weibo api 
+        :param suffix: str,
+        :param method: str,http method: GET,POST,PUT.etc
+        :param params: dict, url query parameters 
+        :param data: dict, 
         :return: 
         """
-        params.update({
-            "access_token": self.access_token
-        })
-        response = self.session.request(method=method,url=url,params=params,data=data)
+        url = self.base + suffix
+        params["access_token"] = self.access_token
 
-        return self._error_handler(response.json())
-
-
-    def _error_handler(self,data):
-        """
-        :return: 
-        """
-        if data.get("error_code"):
+        response = self.session.request(method=method, url=url, params=params, data=data)
+        json_obj = response.json()
+        if json_obj.get("error_code"):
             raise WeiboAPIError(data["error_code"], data["error"])
         else:
-            return data
+            return json_obj

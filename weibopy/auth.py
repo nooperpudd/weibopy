@@ -11,7 +11,6 @@ class WeiboAuth(object):
 
     def __init__(self, client_id, client_secret, redirect_url, scope, state, display, language, force_login=False):
         """
-        
         display:
             
         :param client_id: (required) str,
