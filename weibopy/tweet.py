@@ -1,6 +1,6 @@
 # encoding:utf-8
-
 from .weibo import WeiboClient
+
 
 class Tweet(WeiboClient):
     """
@@ -42,7 +42,7 @@ class Tweet(WeiboClient):
         
         :return: 
         """
-        return self.request("get", "statuses/public_timeline.json",  params=kwargs)
+        return self.request("get", "statuses/public_timeline.json", params=kwargs)
 
     def home_timeline(self, **kwargs):
         """
@@ -192,7 +192,7 @@ class Tweet(WeiboClient):
         """
         return self.request("get", "statuses/user_timeline/ids.json", params=kwargs)
 
-    def timeline_batch(self,**kwargs):
+    def timeline_batch(self, **kwargs):
         """
         
         批量获取指定的一批用户的微博列表
@@ -243,7 +243,7 @@ class Tweet(WeiboClient):
         """
         return self.request("get", "statuses/timeline_batch.json", params=kwargs)
 
-    def repost_timeline(self,**kwargs):
+    def repost_timeline(self, **kwargs):
         """
         获取指定微博的转发微博列表
 
@@ -283,7 +283,7 @@ class Tweet(WeiboClient):
         """
         return self.request("get", "statuses/repost_timeline.json", params=kwargs)
 
-    def report_timeline_ids(self,**kwargs):
+    def report_timeline_ids(self, **kwargs):
         """
         原创微博的最新转发微博的ID
 
@@ -317,7 +317,7 @@ class Tweet(WeiboClient):
         """
         return self.request("get", "statuses/repost_timeline/ids.json", params=kwargs)
 
-    def mentions(self,**kwargs):
+    def mentions(self, **kwargs):
         """
         
         获取最新的提到登录用户的微博列表，即@我的微博
@@ -367,7 +367,7 @@ class Tweet(WeiboClient):
         """
         return self.request("get", "statuses/mentions.json", params=kwargs)
 
-    def methions_ids(self,**kwargs):
+    def methions_ids(self, **kwargs):
         """
         获取@当前用户的最新微博的ID
         
@@ -376,7 +376,8 @@ class Tweet(WeiboClient):
         """
 
         pass
-    def bilateral_timeline(self,**kwargs):
+
+    def bilateral_timeline(self, **kwargs):
         """
         获取双向关注用户的最新微博
         :param kwargs: 
@@ -384,14 +385,15 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def show(self,**kwargs):
+    def show(self, **kwargs):
         """
         根据ID获取单条微博信息
         :param kwargs: 
         :return: 
         """
         pass
-    def show_batch(self,**kwargs):
+
+    def show_batch(self, **kwargs):
         """
         根据微博ID批量获取微博信息 
         :param kwargs: 
@@ -399,14 +401,15 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def querymid(self,**kwargs):
+    def querymid(self, **kwargs):
         """
         通过id获取mid
         :param kwargs: 
         :return: 
         """
         pass
-    def queryid(self,**kwargs):
+
+    def queryid(self, **kwargs):
         """
         通过mid获取id
         :param kwargs: 
@@ -414,7 +417,7 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def count(self,**kwargs):
+    def count(self, **kwargs):
         """
         批量获取指定微博的转发数评论数
         :param kwargs: 
@@ -422,14 +425,15 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def go(self,**kwargs):
+    def go(self, **kwargs):
         """
         根据ID跳转到单条微博页
         :param kwargs: 
         :return: 
         """
         pass
-    def emotions(self,**kwargs):
+
+    def emotions(self, **kwargs):
         """
         获取官方表情
         :param kwargs: 
@@ -437,7 +441,7 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def share(self,**kwargs):
+    def share(self, **kwargs):
         """
         第三方分享链接到微博
         :param kwargs: 
@@ -445,7 +449,7 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def repost(self,**kwargs):
+    def repost(self, **kwargs):
         """
         转发一条微博信息
         :param kwargs: 
@@ -453,13 +457,14 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def destroy(self,**kwargs):
+    def destroy(self, **kwargs):
         """
         删除微博信息
         :param kwargs: 
         :return: 
         """
-    def update(self,**kwargs):
+
+    def update(self, **kwargs):
         """
         发布一条微博信息
         :param kwargs: 
@@ -467,7 +472,7 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def upload(self,**kwargs):
+    def upload(self, **kwargs):
         """
         上传图片并发布一条微博
         :param kwargs: 
@@ -475,7 +480,7 @@ class Tweet(WeiboClient):
         """
         pass
 
-    def upload_url_text(self,**kwargs):
+    def upload_url_text(self, **kwargs):
         """
         发布一条微博同时指定上传的图片或图片url
         :param kwargs: 

@@ -189,6 +189,9 @@ appkey permission denied	21337	应用权限不足
 -	-	-
 21901	Geo code input error	地理信息输入错误
 
+Insufficient app permissions	10014	第三方应用访问api接口权限受限制	应用没有接口的权限，需要在应用控制台接口管理那在线申请
+access_denied	10032	用户或授权服务器拒绝授予数据访问权限	重新向用户申请scope权限
+
 
 """
 
