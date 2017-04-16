@@ -35,6 +35,12 @@ class WeiboClient(object):
         response = self.session.request(method=method, url=url, params=params, data=data)
         json_obj = response.json()
         if json_obj.get("error_code"):
-            raise WeiboAPIError(data["error_code"], data["error"])
+
+            # {
+            #     "request": "/statuses/home_timeline.json",
+            #     "error_code": "20502",
+            #     "error": "Need you follow uid."
+            # }
+            raise WeiboAPIError(json_obj.get("request"), data["error_code"], data["error"])
         else:
             return json_obj

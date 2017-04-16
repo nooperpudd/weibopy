@@ -1,28 +1,33 @@
 # encoding:utf-8
 
 """
-redirect_uri_mismatch	21322	重定向地址不匹配
-invalid_request	21323	请求不合法
-invalid_client	21324	client_id或client_secret参数无效
-invalid_grant	21325	提供的Access Grant是无效的、过期的或已撤销的
-unauthorized_client	21326	客户端没有权限
-expired_token	21327	token过期
-unsupported_grant_type	21328	不支持的 GrantType
-unsupported_response_type	21329	不支持的 ResponseType
-access_denied	21330	用户或授权服务器拒绝授予数据访问权限
-temporarily_unavailable	21331	服务暂时无法访问
-appkey permission denied	21337	应用权限不足
 
+Oauth2 
 
-# error code response
+错误编号(error_code) 错误码(error)		错误描述(error_description)
 
-{
-    "request" : "/statuses/home_timeline.json",
-    "error_code" : "20502",
-    "error" : "Need you follow uid."
-}
+21322 redirect_uri_mismatch		    重定向地址不匹配
+21323 invalid_request		        请求不合法
+21324 invalid_client		        client_id或client_secret参数无效
+21325 invalid_grant		            提供的Access Grant是无效的、过期的或已撤销的
+21326 unauthorized_client		    客户端没有权限
+21327 expired_token		            token过期
+21328 unsupported_grant_type		不支持的 GrantType
+21329 unsupported_response_type		不支持的 ResponseType
+21330 access_denied		            用户或授权服务器拒绝授予数据访问权限
+21331 temporarily_unavailable		服务暂时无法访问
+21337 appkey permission denied		应用权限不足
 
+Scope:
 
+10014 Insufficient app permissions	第三方应用访问api接口权限受限制	应用没有接口的权限，需要在应用控制台接口管理那在线申请
+10032 access_denied		用户或授权服务器拒绝授予数据访问权限	重新向用户申请scope权限
+
+#############################################################################
+
+Weibo API
+
+系统级错误代码
 
 错误代码	错误信息	详细描述
 10001	System error	系统错误
@@ -47,6 +52,8 @@ appkey permission denied	21337	应用权限不足
 10022	IP requests out of rate limit	IP请求频次超过上限
 10023	User requests out of rate limit	用户请求频次超过上限
 10024	User requests for (%s) out of rate limit	用户请求特殊接口 (%s) 频次超过上限
+
+
 服务级错误代码
 
 错误代码	错误信息	详细描述
@@ -71,29 +78,24 @@ appkey permission denied	21337	应用权限不足
 20022	Your ip's behave in a comic boisterous or unruly manner	此IP地址上的行为异常
 20031	Test and verify	需要验证码
 20032	Update success, while server slow now, please wait 1-2 minutes	发布成功，目前服务器可能会有延迟，请耐心等待1-2分钟
--	-	-
 20101	Target weibo does not exist	不存在的微博
 20102	Not your own weibo	不是你发布的微博
 20103	Can't repost yourself weibo	不能转发自己的微博
 20104	Illegal weibo	不合法的微博
 20109	Weibo id is null	微博ID为空
 20111	Repeated weibo text	不能发布相同的微博
--	-	-
 20201	Target weibo comment does not exist	不存在的微博评论
 20202	Illegal comment	不合法的评论
 20203	Not your own comment	不是你发布的评论
 20204	Comment id is null	评论ID为空
--	-	-
 20301	Can't send direct message to user who is not your follower	不能给不是你粉丝的人发私信
 20302	Illegal direct message	不合法的私信
 20303	Not your own direct message	不是属于你的私信
 20305	Direct message does not exist	不存在的私信
 20306	Repeated direct message text	不能发布相同的私信
 20307	Illegal direct message id	非法的私信ID
--	-	-
 20401	Domain not exist	域名不存在
 20402	Wrong verifier	Verifier错误
--	-	-
 20501	Source_user or target_user does not exists	参数source_user或者target_user的用户不存在
 20502	Please input right target user id or screen_name	必须输入目标用户id或者screen_name
 20503	Need you follow user_id	参数user_id必须是你关注的用户
@@ -111,7 +113,6 @@ appkey permission denied	21337	应用权限不足
 20522	Not followed	还未关注此用户
 20523	Not followers	还不是粉丝
 20524	Hi Superman, you have cancelled concerning a lot of people, have a think of how to make other people concern about you! ! If you have any questions, please contact Sina customer service: 400 690 0000	hi 超人，你今天已经取消关注很多喽，接下来的时间想想如何让大家都来关注你吧！如有问题，请联系新浪客服：400 690 0000
--	-	-
 20601	List name too long, please input text less than 10 characters	列表名太长，请确保输入的文本不超过10个字符
 20602	List description too long, please input text less than 70 characters	列表描叙太长，请确保输入的文本不超过70个字符
 20603	List does not exists	列表不存在
@@ -126,28 +127,22 @@ appkey permission denied	21337	应用权限不足
 20613	You hava subscriber too many lists	订阅列表达到上限
 20614	Too many lists, see doc for more info	创建列表达到上限，请参考API文档
 20615	Too many members, see doc for more info	列表成员上限，请参考API文档
--	-	-
 20701	Repeated tag text	不能提交相同的收藏标签
 20702	Tags is too many	最多两个收藏标签
 20703	Illegal tag name	收藏标签名不合法
--	-	-
 20801	Trend_name is null	参数trend_name是空值
 20802	Trend_id is null	参数trend_id是空值
--	-	-
 20901	Error: in blacklist	错误:已经添加了黑名单
 20902	Error: Blacklist limit has been reached.	错误:已达到黑名单上限
 20903	Error: System administrators can not be added to the blacklist.	错误:不能添加系统管理员为黑名单
 20904	Error: Can not add yourself to the blacklist.	错误:不能添加自己为黑名单
 20905	Error: not in blacklist	错误:不在黑名单中
--	-	-
 21001	Tags parameter is null	标签参数为空
 21002	Tags name too long	标签名太长，请确保每个标签名不超过14个字符
--	-	-
 21101	Domain parameter is error	参数domain错误
 21102	The phone number has been used	该手机号已经被使用
 21103	The account has bean bind phone	该用户已经绑定手机
 21104	Wrong verifier	Verifier错误
--	-	-
 21301	Auth faild	认证失败
 21302	Username or password error	用户名或密码不正确
 21303	Username and pwd auth out of rate limit	用户名密码认证超过请求限制
@@ -171,34 +166,56 @@ appkey permission denied	21337	应用权限不足
 21321	Applications over the unaudited use restrictions	未审核的应用使用人数超过限制
 21327	Expired token	token过期
 21335	Request uid's value must be the current user	uid参数仅允许传入当前授权用户uid
--	-	-
 21501	Urls is null	参数urls是空的
 21502	Urls is too many	参数urls太多了
 21503	IP is null	IP是空值
 21504	Url is null	参数url是空值
--	-	-
 21601	Manage notice error, need auth	需要系统管理员的权限
 21602	Contains forbid world	含有敏感词
 21603	Applications send notice over the restrictions	通知发送达到限制
--	-	-
 21701	Manage remind error, need auth	提醒失败，需要权限
 21702	Invalid category	无效分类
 21703	Invalid status	无效状态码
--	-	-
 21901	Geo code input error	地理信息输入错误
 
-Insufficient app permissions	10014	第三方应用访问api接口权限受限制	应用没有接口的权限，需要在应用控制台接口管理那在线申请
-access_denied	10032	用户或授权服务器拒绝授予数据访问权限	重新向用户申请scope权限
+
+
 
 
 """
 
 
+class WeiboOauth2Error(Exception):
+    """
+    error: 错误码
+    error_code: 错误的内部编号
+    error_description: 错误的描述信息
+    error_url: 可读的网页URI，带有关于错误的信息，用于为终端用户提供与错误有关的额外信息。
+    {
+        "error": "unsupported_response_type",
+        "error_code": 21329,
+        "error_description": "不支持的ResponseType."
+    }
+    """
+
+    def __init__(self, error_code, error, description):
+        self.error_code = error_code
+        self.error = error
+        self.description = description
+
+
 class WeiboAPIError(Exception):
     """
+    {
+        "request" : "/statuses/home_timeline.json",
+        "error_code" : "20502",
+        "error" : "Need you follow uid."
+    }
     """
-    def __init__(self, error_code, error):
+
+    def __init__(self, request_url, error_code, error):
         """
         """
+        self.request_url = request_url
         self.error_code = error_code
         self.error = error

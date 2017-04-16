@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from .exceptions import WeiboAPIError
+from .exceptions import WeiboOauth2Error
 
 
 class WeiboAuth(object):
@@ -102,7 +102,12 @@ class WeiboAuth(object):
         json_obj = response.json()
 
         if json_obj.get("error_code"):
-            raise WeiboAPIError(data["error_code"], data["error"])
+            # {
+            #     "error": "unsupported_response_type",
+            #     "error_code": 21329,
+            #     "error_description": "不支持的ResponseType."
+            # }
+            raise WeiboOauth2Error(data.get("error_code"), data.get("error"), data.get('error_description'))
         else:
             return json_obj
 
