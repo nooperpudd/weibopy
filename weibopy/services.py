@@ -165,7 +165,7 @@ class WeiboServices(WeiboClient):
         """
         group_urls = [("url_long", url) for url in urls]
         suffix = "short_url/shorten.json?{0}".format(urlencode(group_urls))
-        return self.request("get", suffix, params={})
+        return self.request("get", suffix)
 
     def short_url_expand(self, urls):
         """
@@ -204,7 +204,7 @@ class WeiboServices(WeiboClient):
         """
         group_urls = [("url_short", url) for url in urls]
         suffix = "short_url/expand.json?{0}".format(urlencode(group_urls))
-        return self.request("get", suffix, params={})
+        return self.request("get", suffix)
 
     def short_url_share_counts(self, urls):
         """
@@ -228,7 +228,7 @@ class WeiboServices(WeiboClient):
 
         suffix = "short_url/share/counts.json?{0}".format(urlencode(group_urls))
 
-        return self.request("get", suffix, params={})
+        return self.request("get", suffix)
 
     def short_url_comment_counts(self, urls):
         """
@@ -253,7 +253,7 @@ class WeiboServices(WeiboClient):
         group_urls = [("url_short", url) for url in urls]
 
         suffix = "short_url/comment/counts.json?{0}".format(urlencode(group_urls))
-        return self.request("get", suffix, params={})
+        return self.request("get", suffix)
 
     def get_timezone(self, **kwargs):
         """
@@ -387,7 +387,7 @@ class WeiboServices(WeiboClient):
         }
        
         """
-        return self.request("get", "account/rate_limit_status.json", params={})
+        return self.request("get", "account/rate_limit_status.json")
 
     def get_uid(self):
         """
@@ -401,7 +401,7 @@ class WeiboServices(WeiboClient):
         }
 
         """
-        return self.request("get", "account/get_uid.json", params={})
+        return self.request("get", "account/get_uid.json")
 
     def profile_email(self):
         """
@@ -418,4 +418,4 @@ class WeiboServices(WeiboClient):
         ]
       
         """
-        return self.request("get", "account/profile/email.json", params={})
+        return self.request("get", "account/profile/email.json")

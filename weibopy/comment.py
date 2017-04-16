@@ -2,7 +2,7 @@
 from .weibo import WeiboClient
 
 
-class WeiboComments(WeiboClient):
+class WeiboComment(WeiboClient):
     """
     """
 

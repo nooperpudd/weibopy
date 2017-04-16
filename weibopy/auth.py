@@ -6,7 +6,7 @@ import requests
 from .exceptions import WeiboOauth2Error
 
 
-class WeiboAuth(object):
+class WeiboOauth2(object):
     """
     weibo OAuth2
     """
@@ -128,12 +128,20 @@ class WeiboAuth(object):
         :param auth_code: authorize_url response code
         :return: 
         
+        normal:
          {
                "access_token": "ACCESS_TOKEN",
                "expires_in": 1234,
                "remind_in":"798114",
                "uid":"12341234"
          }
+         mobile:
+         {
+            "access_token": "SlAV32hkKG",
+            "remind_in": 3600,
+            "expires_in": 3600
+            "refresh_token": "QXBK19xm62"
+        }
         
         """
         data = {
@@ -163,6 +171,8 @@ class WeiboAuth(object):
 
     def refresh_token(self, refresh_token):
         """
+        
+        only for mobile
         授权有效期内重新授权
         Refresh Token 也是有有效期的，Refresh Token 的有效期目前为30天，在有效期内随时可以刷新。
         

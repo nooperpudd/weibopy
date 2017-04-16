@@ -45,5 +45,4 @@ class WeiboQRCode(WeiboClient):
         :param ticket: 开发者通过eps/qrcode/create生成的ticket
         :return: 调用成功返回一张图片，可以直接展示或者下载；
         """
-        # todo no auth
         return self.request("post", "eps/qrcode/show", params={"ticket": ticket})

@@ -13,8 +13,8 @@ class WeiboClient(object):
     def __init__(self, access_token):
         """
         """
-        self.access_token = access_token
         self.session = requests.Session()
+        self.session.headers.update({"Authorization": "OAuth2 " + access_token})
 
     def request(self, method, suffix, params=None, data=None):
         """
@@ -26,11 +26,6 @@ class WeiboClient(object):
         :return: 
         """
         url = self.base + suffix
-
-        if params is not None:
-            params["access_token"] = self.access_token
-        if data is not None:
-            data["access_token"] = self.access_token
 
         response = self.session.request(method=method, url=url, params=params, data=data)
         json_obj = response.json()
