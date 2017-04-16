@@ -2,7 +2,7 @@
 from .weibo import WeiboClient
 
 
-class Relation(WeiboClient):
+class WeiboRelation(WeiboClient):
     """
     weibo relation api
     """
@@ -358,6 +358,13 @@ class Relation(WeiboClient):
         此接口仅针对微博类客户端开放，非微博类客户端应用不开放此接口权限。
         
         
+        
+                        必选	    类型及范围	说明
+        access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得。
+        uid	            false	int64	需要关注的用户ID。
+        screen_name	    false	string	需要关注的用户昵称。
+        rip	            false	string	开发者上报的操作用户真实IP，形如：211.156.0.1。
+        
         返回字段说明
         返回值字段	字段类型	字段说明
         id	int64	用户UID
@@ -395,11 +402,6 @@ class Relation(WeiboClient):
         bi_followers_count	int	用户的互粉数
         lang	string	用户当前的语言版本，zh-cn：简体中文，zh-tw：繁体中文，en：英语
         
-        请求参数
-        	        必选	    类型及范围	说明
-        uid	        false	int64	    需要关注的用户ID。
-        screen_name	false	string	    需要关注的用户昵称。
-        rip	        false	string	    开发者上报的操作用户真实IP，形如：211.156.0.1。
         :param kwargs: 
         :return: 
         
@@ -448,9 +450,9 @@ class Relation(WeiboClient):
             "bi_followers_count": 215
         }
         """
-        return self.request("post", "friendships/create.json", params=kwargs)
+        return self.request("post", "friendships/create.json", data=kwargs)
 
-    def destory(self, **kwargs):
+    def destroy(self, **kwargs):
         """
         访问级别：高级接口（需要授权）
         频次限制：是
@@ -548,4 +550,4 @@ class Relation(WeiboClient):
             "bi_followers_count": 215
         }
         """
-        return self.request("post", "friendships/destroy.json", params=kwargs)
+        return self.request("post", "friendships/destroy.json", data=kwargs)

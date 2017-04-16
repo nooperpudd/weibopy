@@ -16,7 +16,7 @@ class WeiboClient(object):
         self.access_token = access_token
         self.session = requests.Session()
 
-    def request(self, method, suffix, params, data=None):
+    def request(self, method, suffix, params=None, data=None):
         """
         request weibo api 
         :param suffix: str,
@@ -26,7 +26,11 @@ class WeiboClient(object):
         :return: 
         """
         url = self.base + suffix
-        params["access_token"] = self.access_token
+
+        if params is not None:
+            params["access_token"] = self.access_token
+        if data is not None:
+            data["access_token"] = self.access_token
 
         response = self.session.request(method=method, url=url, params=params, data=data)
         json_obj = response.json()

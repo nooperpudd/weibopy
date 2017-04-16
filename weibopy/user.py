@@ -2,10 +2,11 @@
 from .weibo import WeiboClient
 
 
-class User(WeiboClient):
+class WeiboUser(WeiboClient):
     """
     weibo user info
     """
+
     def show(self, **kwargs):
         """
         
@@ -226,8 +227,8 @@ class User(WeiboClient):
         接口升级后，对未授权本应用的uid，将无法获取其粉丝数、关注数及微博数。
         
         请求参数
-        	            必选	    类型及范围	说明
-        uids	        true	string	需要获取数据的用户UID，多个之间用逗号分隔，最多不超过100个。
+                        必选      类型及范围	说明
+        uids	        true	string	    需要获取数据的用户UID，多个之间用逗号分隔，最多不超过100个。
            
         
         返回字段说明

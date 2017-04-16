@@ -93,7 +93,7 @@ class WeiboAuth(object):
     def request(self, method, suffix, data):
         """
         :param method: 
-        :param url: 
+        :param suffix: 
         :param data: 
         :return: 
         """
@@ -183,7 +183,6 @@ class WeiboAuth(object):
         """
         查询用户access_token的授权相关信息，包括授权时间，过期时间和scope权限。
 
-       
         response:
         
                 返回值字段	字段类型	字段说明

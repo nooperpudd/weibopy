@@ -14,8 +14,6 @@ temporarily_unavailable	21331	服务暂时无法访问
 appkey permission denied	21337	应用权限不足
 
 
-
-
 # error code response
 
 {
@@ -195,16 +193,12 @@ access_denied	10032	用户或授权服务器拒绝授予数据访问权限	重�
 
 """
 
+
 class WeiboAPIError(Exception):
     """
     """
-    def __init__(self,error_code,error):
+    def __init__(self, error_code, error):
         """
         """
-        self.error_code =error_code
-        self.error=error
-
-
-
-
-
+        self.error_code = error_code
+        self.error = error

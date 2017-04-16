@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 from .weibo import WeiboClient
 
 
-class Services(WeiboClient):
+class WeiboServices(WeiboClient):
     """
     weibo other info services
     """
