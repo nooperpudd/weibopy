@@ -1,5 +1,4 @@
 # encoding:utf-8
-
 from .auth import WeiboAuth
 from .comment import WeiboComments
 from .exceptions import WeiboAPIError, WeiboOauth2Error
@@ -18,3 +17,5 @@ __all__ = [
     "WeiboTweet",
     "WeiboUser"
 ]
+
+__version__ = '0.1.0'
