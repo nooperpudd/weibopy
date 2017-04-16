@@ -16,6 +16,8 @@ Normal support Python3 version.
 2. Now we can get the `App Key` and `App Secret` in the weibo app info page.
 3. Set the callback url in the weibo app settings.
 4. Token authorization. 
+
+
 ```Python
 
 from weibopy import WeiboOauth2
@@ -26,8 +28,6 @@ redirect_url="http://"
 client = WeiboOauth2(client_id,client_secret,redirect_url)
 
 authorize_url = client.authorize_url
-
-
 
 # 'https://api.weibo.com/oauth2/authorize?redirect_uri=http%3A%2F%2F127.0.0.1%2Fcallback&client_id=123456'
 ```
