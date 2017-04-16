@@ -17,16 +17,17 @@ setup(
     install_requires=["requests"],
     zip_safe=False,
     classifiers=[
-        "Topic :: Software Development",
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
-        'Programming Language :: Python',
+        "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
-        'Environment :: Web Environment',
+        "Environment :: Web Environment",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ]
 
 )
