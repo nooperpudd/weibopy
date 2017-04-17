@@ -421,7 +421,6 @@ class WeiboTweet(WeiboClient):
         使用官方移动SDK调用，可多返回30%的非授权用户的微博；
         
                         必选	    类型及范围	说明
-        access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得。
         uids	        false	string	需要查询的用户ID，用半角逗号分隔，一次最多20个。
         screen_names	false	string	需要查询的用户昵称，用半角逗号分隔，一次最多20个。
         count	        false	int	    单页返回的记录条数，默认为20。
@@ -933,14 +932,13 @@ class WeiboTweet(WeiboClient):
             "total_number": 16
         }
         """
-        return self.request("get", "bilateral_timeline.json", params=kwargs)
+        return self.request("get", "statuses/bilateral_timeline.json", params=kwargs)
 
     def show(self, **kwargs):
         """
         访问级别：普通接口
         频次限制：是
         根据ID获取单条微博信息
-        
         
         请求参数
  	                    必选	    类型及范围	说明
@@ -1234,6 +1232,7 @@ class WeiboTweet(WeiboClient):
         :param kwargs: 
         :return: None
         """
+        # todo test
         self.request("get", "statuses/go", params=kwargs)
 
     def emotions(self, **kwargs):

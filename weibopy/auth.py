@@ -101,13 +101,13 @@ class WeiboOauth2(object):
         response = self.session.request(method, url, data=data)
         json_obj = response.json()
 
-        if json_obj.get("error_code"):
+        if isinstance(json_obj,dict)  and json_obj.get("error_code"):
             # {
             #     "error": "unsupported_response_type",
             #     "error_code": 21329,
             #     "error_description": "不支持的ResponseType."
             # }
-            raise WeiboOauth2Error(data.get("error_code"), data.get("error"), data.get('error_description'))
+            raise WeiboOauth2Error(json_obj.get("error_code"), json_obj.get("error"), json_obj.get('error_description'))
         else:
             return json_obj
 
@@ -161,7 +161,9 @@ class WeiboOauth2(object):
         应用新上线了功能，需要取得用户scope权限，可以回收后重新引导用户授权
         开发者调试应用，需要反复调试授权功能
         应用内实现类似登出微博帐号的功能
-
+        
+        并传递给你以下参数，source：应用appkey，uid ：取消授权的用户，auth_end ：取消授权的时间
+        
         :param access_token: 
         :return: bool
         """

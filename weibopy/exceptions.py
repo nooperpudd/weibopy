@@ -199,7 +199,7 @@ class WeiboOauth2Error(Exception):
         self.error = error
         self.description = description
 
-        Exception.__init__(self, error_code, error, description)
+        super(WeiboOauth2Error, self).__init__(error_code, error, description)
 
     def __str__(self):
         return '{0.error_code}: ({0.error}) {0.description}'.format(self)
@@ -213,13 +213,14 @@ class WeiboAPIError(Exception):
         "error" : "Need you follow uid."
     }
     """
+
     def __init__(self, request_url, error_code, error):
         """
         """
         self.request_url = request_url
         self.error_code = error_code
         self.error = error
-        Exception.__init__(self, request_url, error_code, error)
+        super(WeiboAPIError, self).__init__(request_url, error_code, error)
 
     def __str__(self):
         return '{0.request_url}: ({0.error_code}) {0.error}'.format(self)
