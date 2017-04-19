@@ -12,7 +12,6 @@ def find_version(*file_paths):
     """
     here = os.path.abspath(os.path.dirname(__file__))
 
-    # Open in Latin-1 so that we avoid encoding errors.
     # Use codecs.open for Python 2 compatibility
     with codecs.open(os.path.join(here, *file_paths), 'r') as f:
         version_file = f.read()

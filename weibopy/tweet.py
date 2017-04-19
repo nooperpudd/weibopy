@@ -1268,7 +1268,7 @@ class WeiboTweet(WeiboClient):
         """
         return self.request("get", "emotions.json", data=kwargs)
 
-    def share(self, **kwargs):
+    def share(self, files, **kwargs):
         """
         访问级别：普通接口
         频次限制：是
@@ -1387,7 +1387,7 @@ class WeiboTweet(WeiboClient):
             }
         }
         """
-        return self.request("post", "statuses/share.json", data=kwargs)
+        return self.request("post", "statuses/share.json", data=kwargs, files=files)
 
     def repost(self, **kwargs):
         """
@@ -1742,7 +1742,7 @@ class WeiboTweet(WeiboClient):
         """
         return self.request("post", "statuses/update.json", data=kwargs)
 
-    def upload(self, **kwargs):
+    def upload(self, files, **kwargs):
         """
         上传图片并发布一条微博
         访问级别：普通接口
@@ -1790,7 +1790,7 @@ class WeiboTweet(WeiboClient):
         pic_ids	object	微博配图ID。多图时返回多图ID，用来拼接图片url。用返回字段thumbnail_pic的地址配上该返回字段的图片ID，即可得到多个图片url。
         ad	object array	微博流内的推广微博ID
         
-        
+        :param files: pic files
         :param kwargs: 
         :return: 
         
@@ -1870,8 +1870,7 @@ class WeiboTweet(WeiboClient):
             }
         }
         """
-        # todo test pic, without files
-        return self.request("post", "statuses/upload.json", data=kwargs)
+        return self.request("post", "statuses/upload.json", data=kwargs, files=files)
 
     def upload_url_text(self, **kwargs):
         """

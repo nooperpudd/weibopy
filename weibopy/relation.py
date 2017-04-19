@@ -312,7 +312,6 @@ class WeiboRelation(WeiboClient):
 
     def show(self, **kwargs):
         """
-        
         访问级别：普通接口
         频次限制：是
         获取两个用户关系的详细情况

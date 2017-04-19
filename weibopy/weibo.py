@@ -13,10 +13,11 @@ class WeiboClient(object):
     def __init__(self, access_token):
         """
         """
+        self.access_token = access_token
         self.session = requests.Session()
         self.session.headers.update({"Authorization": "OAuth2 " + access_token})
 
-    def request(self, method, suffix, params=None, data=None):
+    def request(self, method, suffix, params=None, data=None, files=None):
         """
         request weibo api 
         :param suffix: str,
@@ -27,10 +28,9 @@ class WeiboClient(object):
         """
         url = self.base + suffix
 
-        response = self.session.request(method=method, url=url, params=params, data=data)
+        response = self.session.request(method=method, url=url, params=params, data=data, files=files)
         json_obj = response.json()
         if isinstance(json_obj, dict) and json_obj.get("error_code"):
-
             # {
             #     "request": "/statuses/home_timeline.json",
             #     "error_code": "20502",

@@ -80,7 +80,7 @@ tweet = WeiboTweet(access_token)
 result =tweet.public_timeline()
 
 
-a= {
+{
     "statuses": [{
                     "created_at": "Tue May 31 17:46:55 +0800 2011",
                     "id": 11488058246,
@@ -133,6 +133,105 @@ a= {
             "total_number": 81655
         }
 ```
+
+How to post a tweet with a picture?
+
+```python
+
+from weibopy import WeiboTweet
+
+access_token = ""
+tweet = WeiboTweet(access_token)
+
+files = {'pic': open('a.png', 'rb')}
+tweet.upload(files=files,status="nihao")
+```
+result:
+
+     'biz_feature': 0,
+     'bmiddle_pic': 'http://wx1.sinaimg.cn/bmiddle/70669a5dly1fescai5ggkj20gf0feq7e.jpg',
+     'comments_count': 0,
+     'created_at': 'Wed Apr 19 22:06:20 +0800 2017',
+     'darwin_tags': [],
+     'favorited': False,
+     'geo': None,
+     'gif_ids': None,
+     'hasActionTypeCard': 0,
+     'hot_weibo_tags': [],
+     'id': 4098369015668443,
+     'idstr': '4098369015668443',
+     'in_reply_to_screen_name': '',
+     'in_reply_to_status_id': '',
+     'in_reply_to_user_id': '',
+     'isLongText': False,
+     'is_show_bulletin': 2,
+     'mid': '4098369015668443',
+     'mlevel': 0,
+     'original_pic': 'http://wx1.sinaimg.cn/large/70669a5dly1fescai5ggkj20gf0feq7e.jpg',
+     'pic_urls': [{'thumbnail_pic': 'http://wx1.sinaimg.cn/thumbnail/70669a5dly1fescai5ggkj20gf0feq7e.jpg'}],
+     'positive_recom_flag': 0,
+     'reposts_count': 0,
+     'source': '<a href="http://open.weibo.com" rel="nofollow">未通过审核应用</a>',
+     'source_allowclick': 0,
+     'source_type': 1,
+     'text': 'hhha \u200b',
+     'textLength': 4,
+     'text_tag_tips': [],
+     'thumbnail_pic': 'http://wx1.sinaimg.cn/thumbnail/70669a5dly1fescai5ggkj20gf0feq7e.jpg',
+     'truncated': False,
+     'user': {'allow_all_act_msg': False,
+              'allow_all_comment': True,
+              'avatar_hd': 'http://tva4.sinaimg.cn/crop.320.120.960.960.1024/70669a5djw1eanuztfpewj218g0xcn9c.jpg',
+              'avatar_large': 'http://tva4.sinaimg.cn/crop.320.120.960.960.180/70669a5djw1eanuztfpewj218g0xcn9c.jpg',
+              'bi_followers_count': 9,
+              'block_app': 0,
+              'block_word': 0,
+              'city': '2',
+              'class': 1,
+              'created_at': 'Tue Dec 07 21:44:06 +0800 2010',
+              'credit_score': 80,
+              'description': '',
+              'domain': 'nooper',
+              'favourites_count': 3,
+              'follow_me': False,
+              'followers_count': 48,
+              'following': False,
+              'friends_count': 140,
+              'gender': 'm',
+              'geo_enabled': True,
+              'id': 1885772381,
+              'idstr': '1885772381',
+              'insecurity': {'sexual_content': False},
+              'lang': 'zh-cn',
+              'location': '北京 西城区',
+              'mbrank': 0,
+              'mbtype': 0,
+              'name': '王小小小小小莫',
+              'online_status': 0,
+              'pagefriends_count': 0,
+              'profile_image_url': 'http://tva4.sinaimg.cn/crop.320.120.960.960.50/70669a5djw1eanuztfpewj218g0xcn9c.jpg',
+              'profile_url': 'nooper',
+              'province': '11',
+              'ptype': 0,
+              'remark': '',
+              'screen_name': '王小小小小小莫',
+              'star': 0,
+              'statuses_count': 168,
+              'urank': 13,
+              'url': '',
+              'user_ability': 0,
+              'verified': False,
+              'verified_reason': '',
+              'verified_reason_url': '',
+              'verified_source': '',
+              'verified_source_url': '',
+              'verified_trade': '',
+              'verified_type': -1,
+              'weihao': ''},
+     'userType': 590081,
+     'visible': {'list_id': 0, 'type': 0}}
+    
+ 
 
 ## Contact
 

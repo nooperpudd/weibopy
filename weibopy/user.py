@@ -126,8 +126,6 @@ class WeiboUser(WeiboClient):
                         必选	    类型及范围	说明
         domain	        true	string	    需要查询的个性化域名。
         
-        
-        
         返回字段说明
         返回值字段	字段类型	字段说明
         id	int64	用户UID

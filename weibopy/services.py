@@ -300,7 +300,7 @@ class WeiboServices(WeiboClient):
                 ]
 
         """
-        return self.request("get", "common/get_city.json", params=kwargs)
+        return self.request("get", "common/get_country.json", params=kwargs)
 
     def get_province(self, **kwargs):
         """

@@ -1,5 +1,4 @@
 # encoding:utf-8
-
 from .weibo import WeiboClient
 
 
@@ -7,7 +6,6 @@ class WeiboQRCode(WeiboClient):
     """
     weibo QR code services
     """
-
     def create(self, **kwargs):
         """
         本接口用来创建二维码ticket
@@ -18,6 +16,11 @@ class WeiboQRCode(WeiboClient):
         4、对于临时二维码，过期时间的计时起点是qrcode/create接口的调用时间；
         5、用户一个未过期扫描带场景值二维码时，可能推送以下两种事件：
           
+        request data:
+        
+        {"action_name": "QR_LIMIT_SCENE", 
+        "action_info": {"scene": {"scene_id": 123}}
+        }
         参数详情：
                         必选	    类型及范围	说明
         access_token	true	string	    在粉丝服务平台 - 高级功能 - 开发者模式页面中获取，或者OAuth2.0授权后获得, 详细参考 获取粉丝服务平台开发接口的access token。
@@ -33,7 +36,7 @@ class WeiboQRCode(WeiboClient):
             "expire_seconds": 1800
         }
         """
-        self.request("post", "eps/qrcode/create.json", data=kwargs)
+        self.request("post", "eps/qrcode/create", params={"access_token": self.access_token}, data=kwargs)
 
     def show(self, ticket):
         """
@@ -45,4 +48,5 @@ class WeiboQRCode(WeiboClient):
         :param ticket: 开发者通过eps/qrcode/create生成的ticket
         :return: 调用成功返回一张图片，可以直接展示或者下载；
         """
+
         return self.request("post", "eps/qrcode/show", params={"ticket": ticket})
