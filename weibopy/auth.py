@@ -54,13 +54,14 @@ class WeiboOauth2(object):
         :param language:  (optional) str
         """
         self.client_id = client_id
+        self.client_secret = client_secret
+
         self.redirect_url = redirect_url
         self.scope = scope
         self.state = state
         self.force_login = force_login
         self.display = display
         self.language = language
-        self.client_secret = client_secret
 
         self.session = requests.Session()
 
@@ -88,6 +89,7 @@ class WeiboOauth2(object):
             "language": self.language,
             "display": self.display
         }
+        params = dict((k, v) for k, v in params.items() if v)
         return "{auth_url}?{params}".format(auth_url=auth_url, params=urlencode(params))
 
     def request(self, method, suffix, data):
@@ -101,7 +103,7 @@ class WeiboOauth2(object):
         response = self.session.request(method, url, data=data)
         json_obj = response.json()
 
-        if isinstance(json_obj,dict)  and json_obj.get("error_code"):
+        if isinstance(json_obj, dict) and json_obj.get("error_code"):
             # {
             #     "error": "unsupported_response_type",
             #     "error_code": 21329,
