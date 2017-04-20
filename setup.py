@@ -34,8 +34,10 @@ setup(
     url="https://coding.net/u/wefindx/p/weibopy/git",
     license="BSD",
     author_email="365504029@qq.com",
-    packages=find_packages(),
+    packages=find_packages(exclude=['*tests*']),
     install_requires=["requests"],
+    tests_require=["pytest",
+                   "httpretty"],
     zip_safe=False,
     classifiers=[
         "Development Status :: 3 - Alpha",
