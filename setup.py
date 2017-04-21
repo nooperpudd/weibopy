@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 
 def find_version(*file_paths):
     """
-    :return: 
+    :return:
     """
     here = os.path.abspath(os.path.dirname(__file__))
 

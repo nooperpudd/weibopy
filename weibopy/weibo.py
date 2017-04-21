@@ -8,7 +8,7 @@ from .exceptions import WeiboAPIError
 
 def filter_params(params):
     """
-    convert dict value if value is bool type, 
+    convert dict value if value is bool type,
     False -> "false"
     True -> "true"
     """
@@ -21,7 +21,7 @@ def filter_params(params):
 
 class WeiboClient(object):
     """
-    weibo client base 
+    weibo client base
     """
     base = "https://api.weibo.com/2/"
 
@@ -34,12 +34,12 @@ class WeiboClient(object):
 
     def request(self, method, suffix, params=None, data=None, files=None):
         """
-        request weibo api 
+        request weibo api
         :param suffix: str,
         :param method: str,http method: GET,POST,PUT.etc
-        :param params: dict, url query parameters 
-        :param data: dict, 
-        :return: 
+        :param params: dict, url query parameters
+        :param data: dict,
+        :return:
         """
         url = self.base + suffix
 
