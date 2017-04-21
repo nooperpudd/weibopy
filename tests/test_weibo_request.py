@@ -10,6 +10,7 @@ from weibopy import WeiboTweet, WeiboAPIError
 class WeiboRequestTestCase(unittest.TestCase):
     """
     """
+
     def setUp(self):
         """
         :return:
@@ -147,4 +148,4 @@ class WeiboRequestTestCase(unittest.TestCase):
                                status=200,
                                content_type='text/json')
 
-        self.assertRaises(WeiboAPIError, self.tweet.public_timeline())
+        self.assertRaises(WeiboAPIError, self.tweet.public_timeline)

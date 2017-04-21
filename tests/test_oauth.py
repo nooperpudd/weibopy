@@ -15,12 +15,12 @@ class Oauth2TestCase(unittest.TestCase):
 
     def setUp(self):
         self.access_token = "xxxxxx"
-        self.client_id = "12345678"
+        self.client_id = "2802433140"
         self.client_secret = "987654321"
-        self.redirect_url = "http://127.0.0.1/oauth2"
+        self.redirect_url = "http://45.32.105.118:8000/weibo"
         self.oauth2_client = WeiboOauth2(client_id=self.client_id,
                                          client_secret=self.client_secret,
-                                         redirect_url=self.redirect_url)
+                                         redirect_url=self.redirect_url, force_login=False)
 
     def test_authorize_url(self):
         """
@@ -29,7 +29,8 @@ class Oauth2TestCase(unittest.TestCase):
         request_params = {
             'client_id': self.client_id,
             'redirect_uri': self.redirect_url,
-            "display": False
+            "display": "default",
+            "forcelogin": "false"
         }
 
         parse_result = parse.urlparse(self.oauth2_client.authorize_url)
@@ -37,11 +38,6 @@ class Oauth2TestCase(unittest.TestCase):
 
         self.assertEqual(parse_result.hostname, "api.weibo.com")
         self.assertEqual(parse_result.path, "/oauth2/authorize")
-
-        print(request_params)
-
-        print("&" * 20)
-        print(query_params)
 
         self.assertDictEqual(query_params, request_params)
 
