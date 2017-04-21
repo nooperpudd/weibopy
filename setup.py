@@ -37,7 +37,7 @@ setup(
     packages=find_packages(exclude=['*tests*']),
     install_requires=["requests"],
     tests_require=["pytest",
-                   "httpretty"],
+                   "HTTPretty"],
     zip_safe=False,
     classifiers=[
         "Development Status :: 3 - Alpha",
