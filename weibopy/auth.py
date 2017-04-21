@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 import requests
 
 from .exceptions import WeiboOauth2Error
+from .weibo import filter_params
 
 
 class WeiboOauth2(object):
@@ -14,7 +15,7 @@ class WeiboOauth2(object):
     mobile_url = "https://open.weibo.cn/oauth2/"
 
     def __init__(self, client_id, client_secret, redirect_url, scope=None,
-                 state=None, display=None, language=None, force_login=False):
+                 state=None, display="default", language=None, force_login=False):
         """    
                         必选	    类型及范围	说明
         client_id	    true	string	    申请应用时分配的AppKey。
@@ -89,7 +90,10 @@ class WeiboOauth2(object):
             "language": self.language,
             "display": self.display
         }
+
         params = dict((k, v) for k, v in params.items() if v is not None)
+        params = filter_params(params)
+
         return "{auth_url}?{params}".format(auth_url=auth_url, params=urlencode(params))
 
     def request(self, method, suffix, data):

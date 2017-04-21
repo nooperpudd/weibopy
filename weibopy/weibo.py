@@ -1,7 +1,22 @@
 # encoding:utf-8
+import copy
+
 import requests
 
 from .exceptions import WeiboAPIError
+
+
+def filter_params(params):
+    """
+    convert dict value if value is bool type, 
+    False -> "false"
+    True -> "true"
+    """
+    new_params = copy.deepcopy(params)
+    for key, value in new_params.items():
+        if isinstance(value, bool):
+            new_params[key] = "true" if value else "false"
+    return new_params
 
 
 class WeiboClient(object):
@@ -27,6 +42,8 @@ class WeiboClient(object):
         :return: 
         """
         url = self.base + suffix
+
+        params = filter_params(params)
 
         response = self.session.request(method=method, url=url, params=params, data=data, files=files)
         json_obj = response.json()
