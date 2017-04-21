@@ -89,7 +89,7 @@ class WeiboOauth2(object):
             "language": self.language,
             "display": self.display
         }
-        params = dict((k, v) for k, v in params.items() if v)
+        params = dict((k, v) for k, v in params.items() if v is not None)
         return "{auth_url}?{params}".format(auth_url=auth_url, params=urlencode(params))
 
     def request(self, method, suffix, data):
