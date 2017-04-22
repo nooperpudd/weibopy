@@ -81,7 +81,7 @@ class WeiboClient(object):
 
     def post(self, suffix, params=None, data=None, files=None):
         """
-        :return 
+        :return:
         """
 
         url = self.base + suffix
