@@ -20,7 +20,7 @@ class Oauth2TestCase(unittest.TestCase):
         self.redirect_url = "http://45.32.105.118:8000/weibo"
         self.oauth2_client = WeiboOauth2(client_id=self.client_id,
                                          client_secret=self.client_secret,
-                                         redirect_url=self.redirect_url, force_login=False)
+                                         redirect_url=self.redirect_url, forcelogin=False)
 
     def test_authorize_url(self):
         """
@@ -29,7 +29,6 @@ class Oauth2TestCase(unittest.TestCase):
         request_params = {
             'client_id': self.client_id,
             'redirect_uri': self.redirect_url,
-            "display": "default",
             "forcelogin": "false"
         }
 
@@ -64,7 +63,7 @@ class Oauth2TestCase(unittest.TestCase):
                "uid":"12341234"
          }
         """
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/",
+        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/access_token",
                                body=body,
                                status=200,
                                content_type='text/json')
@@ -76,7 +75,7 @@ class Oauth2TestCase(unittest.TestCase):
         """
         :return:
         """
-        body = "{'result':true}"
+        body = '{"result":true}'
         httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/revokeoauth2",
                                body=body,
                                status=200,
@@ -116,7 +115,7 @@ class Oauth2TestCase(unittest.TestCase):
            "expire_in": 157679471
          }
         """
-        httpretty.register_uri(httpretty.GET, "https://api.weibo.com/oauth2/get_token_info",
+        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/get_token_info",
                                body=body,
                                status=200,
                                content_type='text/json')
@@ -133,7 +132,7 @@ class Oauth2TestCase(unittest.TestCase):
         {
                 "error": "unsupported_response_type",
                 "error_code": 21329,
-                "error_description": "不支持的ResponseType."
+                "error_description": "Unsupport ResponseType."
             }
         """
 
@@ -142,4 +141,4 @@ class Oauth2TestCase(unittest.TestCase):
                                status=200,
                                content_type='text/json')
 
-        self.assertRaises(WeiboOauth2Error, self.oauth2_client.get_token_info("bdssds"))
+        self.assertRaises(WeiboOauth2Error, self.oauth2_client.get_token_info, "dbdsds")
