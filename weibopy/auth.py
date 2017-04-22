@@ -104,17 +104,23 @@ class WeiboOauth2(object):
 
             if isinstance(json_obj, dict) and json_obj.get("error_code"):
 
-                raise WeiboOauth2Error(json_obj.get("error_code"),
-                                       json_obj.get("error"),
-                                       json_obj.get('error_description'))
+                raise WeiboOauth2Error(
+                    json_obj.get("error_code"),
+                    json_obj.get("error"),
+                    json_obj.get('error_description')
+                )
             else:
                 return json_obj
         else:
-            raise WeiboRequestError("Weibo API request error: status code: {code} url:{url} ->"
-                                    " method:{method}: data={data}".format(code=response.status_code,
-                                                                           url=response.url,
-                                                                           method=method,
-                                                                           data=data))
+            raise WeiboRequestError(
+                "Weibo API request error: status code: {code} url:{url} ->"
+                " method:{method}: data={data}".format(
+                    code=response.status_code,
+                    url=response.url,
+                    method=method,
+                    data=data
+                )
+            )
 
     def auth_access(self, auth_code):
         """

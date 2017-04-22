@@ -18,14 +18,19 @@ class Oauth2TestCase(unittest.TestCase):
         self.client_id = "2802433140"
         self.client_secret = "987654321"
         self.redirect_url = "http://45.32.105.118:8000/weibo"
-        self.oauth2_client = WeiboOauth2(client_id=self.client_id,
-                                         client_secret=self.client_secret,
-                                         redirect_url=self.redirect_url, forcelogin=False)
+
+        self.oauth2_client = WeiboOauth2(
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            redirect_url=self.redirect_url,
+            forcelogin=False
+        )
 
     def test_authorize_url(self):
         """
         :return:
         """
+
         request_params = {
             'client_id': self.client_id,
             'redirect_uri': self.redirect_url,
@@ -44,9 +49,13 @@ class Oauth2TestCase(unittest.TestCase):
         """
         :return:
         """
-        oauth2_client = WeiboOauth2(client_id=self.client_id,
-                                    client_secret=self.client_secret,
-                                    redirect_url=self.redirect_url, display="mobile")
+
+        oauth2_client = WeiboOauth2(
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            redirect_url=self.redirect_url,
+            display="mobile"
+        )
 
         parse_result = parse.urlparse(oauth2_client.authorize_url)
         self.assertEqual(parse_result.hostname, "open.weibo.cn")
@@ -55,6 +64,7 @@ class Oauth2TestCase(unittest.TestCase):
         """
         :return:
         """
+
         body = """
            {
                "access_token": "ACCESS_TOKEN",
@@ -63,10 +73,14 @@ class Oauth2TestCase(unittest.TestCase):
                "uid":"12341234"
          }
         """
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/access_token",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/oauth2/access_token",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
+
         response = self.oauth2_client.auth_access("abcde")
 
         self.assertDictEqual(response, json.loads(body))
@@ -75,11 +89,15 @@ class Oauth2TestCase(unittest.TestCase):
         """
         :return:
         """
+
         body = '{"result":true}'
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/revokeoauth2",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/oauth2/revokeoauth2",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         response = self.oauth2_client.revoke_auth_access(self.access_token)
         self.assertTrue(response)
@@ -88,16 +106,20 @@ class Oauth2TestCase(unittest.TestCase):
         """
         :return:
         """
+
         body = """
          {
             "access_token": "SlAV32hkKG",
             "expires_in": 3600
         }
         """
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/access_token",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/oauth2/access_token",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         response = self.oauth2_client.refresh_token("xxxxxxxx")
         self.assertTrue(response, json.loads(body))
@@ -115,10 +137,13 @@ class Oauth2TestCase(unittest.TestCase):
            "expire_in": 157679471
          }
         """
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/get_token_info",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/oauth2/get_token_info",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         response = self.oauth2_client.get_token_info(self.access_token)
 
@@ -136,9 +161,11 @@ class Oauth2TestCase(unittest.TestCase):
             }
         """
 
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/oauth2/get_token_info",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/oauth2/get_token_info",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         self.assertRaises(WeiboOauth2Error, self.oauth2_client.get_token_info, "dbdsds")

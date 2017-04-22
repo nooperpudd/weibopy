@@ -31,10 +31,12 @@ class WeiboRequestTestCase(unittest.TestCase):
          "4098746172045575", "4098746172045403", "4098746160243131", "4098746139219122"], "ad": [],
          "advertises": [], "interval": 0, "previous_cursor": 0, "total_number": 1322}
         """
-        httpretty.register_uri(httpretty.GET, "https://api.weibo.com/2/statuses/friends_timeline/ids.json",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+        httpretty.register_uri(
+            httpretty.GET, "https://api.weibo.com/2/statuses/friends_timeline/ids.json",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         self.assertDictEqual(self.client.get("statuses/friends_timeline/ids.json"), json.loads(body))
 
@@ -129,10 +131,12 @@ class WeiboRequestTestCase(unittest.TestCase):
           }
         }
         """
-        httpretty.register_uri(httpretty.POST, "https://api.weibo.com/2/statuses/update.json",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+        httpretty.register_uri(
+            httpretty.POST, "https://api.weibo.com/2/statuses/update.json",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         self.assertDictEqual(self.client.post("statuses/update.json"), json.loads(body))
 
@@ -147,9 +151,11 @@ class WeiboRequestTestCase(unittest.TestCase):
                         "error": "Need you follow uid."
                 }
                 """
-        httpretty.register_uri(httpretty.GET, "https://api.weibo.com/2/statuses/home_timeline.json",
-                               body=body,
-                               status=200,
-                               content_type='text/json')
+        httpretty.register_uri(
+            httpretty.GET, "https://api.weibo.com/2/statuses/home_timeline.json",
+            body=body,
+            status=200,
+            content_type='text/json'
+        )
 
         self.assertRaises(WeiboAPIError, self.client.get, "statuses/home_timeline.json")

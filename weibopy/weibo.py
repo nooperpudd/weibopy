@@ -42,8 +42,8 @@ class WeiboClient(object):
             "error_code": "20502",
             "error": "Need you follow uid."
         }
-        :param response: 
-        :return: 
+        :param response:
+        :return:
         """
         if response.status_code == 200:
             data = response.json()
@@ -53,11 +53,15 @@ class WeiboClient(object):
             else:
                 return data
         else:
-            raise WeiboRequestError("Weibo API request error: status code: {code} url:{url} ->"
-                                    " method:{method}: data={data}".format(code=response.status_code,
-                                                                           url=response.url,
-                                                                           method=response.request.method,
-                                                                           data=data))
+            raise WeiboRequestError(
+                "Weibo API request error: status code: {code} url:{url} ->"
+                " method:{method}: data={data}".format(
+                    code=response.status_code,
+                    url=response.url,
+                    method=response.request.method,
+                    data=data
+                )
+            )
 
     def get(self, suffix, params=None):
         """
@@ -67,17 +71,22 @@ class WeiboClient(object):
         :return:
 
         """
+
         url = self.base + suffix
         params = filter_params(params)
+
         response = self.session.get(url=url, params=params)
 
         return self._handler_response(response)
 
     def post(self, suffix, params=None, data=None, files=None):
         """
-        :return: 
+        :return 
         """
+
         url = self.base + suffix
         params = filter_params(params)
+
         response = self.session.post(url=url, params=params, data=data, files=files)
+
         return self._handler_response(response, data=data)
