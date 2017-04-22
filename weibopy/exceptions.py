@@ -181,6 +181,12 @@ Weibo API
 """
 
 
+class WeiboRequestError(Exception):
+    """
+    """
+    pass
+
+
 class WeiboOauth2Error(Exception):
     """
     error: 错误码

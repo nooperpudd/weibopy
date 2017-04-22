@@ -3,7 +3,7 @@ import copy
 
 import requests
 
-from .exceptions import WeiboAPIError
+from .exceptions import WeiboAPIError, WeiboRequestError
 
 
 def filter_params(params):
@@ -12,11 +12,13 @@ def filter_params(params):
     False -> "false"
     True -> "true"
     """
-    new_params = copy.deepcopy(params)
-    for key, value in new_params.items():
-        if isinstance(value, bool):
-            new_params[key] = "true" if value else "false"
-    return new_params
+    if params is not None:
+        new_params = copy.deepcopy(params)
+        new_params = dict((k, v) for k, v in new_params.items() if v is not None)
+        for key, value in new_params.items():
+            if isinstance(value, bool):
+                new_params[key] = "true" if value else "false"
+        return new_params
 
 
 class WeiboClient(object):
@@ -32,28 +34,50 @@ class WeiboClient(object):
         self.session = requests.Session()
         self.session.headers.update({"Authorization": "OAuth2 " + access_token})
 
-    def request(self, method, suffix, params=None, data=None, files=None):
+    def _handler_response(self, response, data=None):
+        """
+        error code response:
+        {
+            "request": "/statuses/home_timeline.json",
+            "error_code": "20502",
+            "error": "Need you follow uid."
+        }
+        :param response: 
+        :return: 
+        """
+        if response.status_code == 200:
+            data = response.json()
+            if isinstance(data, dict) and data.get("error_code"):
+
+                raise WeiboAPIError(data.get("request"), data.get("error_code"), data.get("error"))
+            else:
+                return data
+        else:
+            raise WeiboRequestError("Weibo API request error: status code: {code} url:{url} ->"
+                                    " method:{method}: data={data}".format(code=response.status_code,
+                                                                           url=response.url,
+                                                                           method=response.request.method,
+                                                                           data=data))
+
+    def get(self, suffix, params=None):
         """
         request weibo api
         :param suffix: str,
-        :param method: str,http method: GET,POST,PUT.etc
         :param params: dict, url query parameters
-        :param data: dict,
         :return:
+
         """
         url = self.base + suffix
-
         params = filter_params(params)
+        response = self.session.get(url=url, params=params)
 
-        response = self.session.request(method=method, url=url, params=params, data=data, files=files)
-        json_obj = response.json()
-        if isinstance(json_obj, dict) and json_obj.get("error_code"):
-            # {
-            #     "request": "/statuses/home_timeline.json",
-            #     "error_code": "20502",
-            #     "error": "Need you follow uid."
-            # }
+        return self._handler_response(response)
 
-            raise WeiboAPIError(json_obj.get("request"), json_obj.get("error_code"), json_obj.get("error"))
-        else:
-            return json_obj
+    def post(self, suffix, params=None, data=None, files=None):
+        """
+        :return: 
+        """
+        url = self.base + suffix
+        params = filter_params(params)
+        response = self.session.post(url=url, params=params, data=data, files=files)
+        return self._handler_response(response, data=data)

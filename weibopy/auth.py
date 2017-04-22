@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from .exceptions import WeiboOauth2Error
+from .exceptions import WeiboOauth2Error, WeiboRequestError
 from .weibo import filter_params
 
 
@@ -14,8 +14,7 @@ class WeiboOauth2(object):
     site_url = "https://api.weibo.com/oauth2/"
     mobile_url = "https://open.weibo.cn/oauth2/"
 
-    def __init__(self, client_id, client_secret, redirect_url, scope=None,
-                 state=None, display="default", language=None, force_login=False):
+    def __init__(self, client_id, client_secret, redirect_url, **kwargs):
         """
         必选            类型及范围    说明
         client_id       true          string        申请应用时分配的AppKey。
@@ -59,13 +58,9 @@ class WeiboOauth2(object):
         """
         self.client_id = client_id
         self.client_secret = client_secret
-
         self.redirect_url = redirect_url
-        self.scope = scope
-        self.state = state
-        self.force_login = force_login
-        self.display = display
-        self.language = language
+
+        self.oauth2_params = kwargs
 
         self.session = requests.Session()
 
@@ -79,7 +74,7 @@ class WeiboOauth2(object):
         state    string    如果传递参数，会回传该参数
         """
 
-        if self.display == "mobile":
+        if self.oauth2_params and self.oauth2_params.get("display") == "mobile":
             auth_url = self.mobile_url + "authorize"
         else:
             auth_url = self.site_url + "authorize"
@@ -87,38 +82,39 @@ class WeiboOauth2(object):
         params = {
             'client_id': self.client_id,
             'redirect_uri': self.redirect_url,
-            "scope": self.scope,
-            "state": self.state,
-            "forcelogin": self.force_login,
-            "language": self.language,
-            "display": self.display
         }
+        params.update(self.oauth2_params)
 
-        params = dict((k, v) for k, v in params.items() if v is not None)
         params = filter_params(params)
 
         return "{auth_url}?{params}".format(auth_url=auth_url, params=urlencode(params))
 
     def request(self, method, suffix, data):
         """
-        :param method: 
-        :param suffix: 
+        :param method: str, http method ["GET","POST","PUT"]
+        :param suffix: the url suffix 
         :param data: 
         :return: 
         """
         url = self.site_url + suffix
         response = self.session.request(method, url, data=data)
-        json_obj = response.json()
 
-        if isinstance(json_obj, dict) and json_obj.get("error_code"):
-            # {
-            #     "error": "unsupported_response_type",
-            #     "error_code": 21329,
-            #     "error_description": "不支持的ResponseType."
-            # }
-            raise WeiboOauth2Error(json_obj.get("error_code"), json_obj.get("error"), json_obj.get('error_description'))
+        if response.status_code == 200:
+            json_obj = response.json()
+
+            if isinstance(json_obj, dict) and json_obj.get("error_code"):
+
+                raise WeiboOauth2Error(json_obj.get("error_code"),
+                                       json_obj.get("error"),
+                                       json_obj.get('error_description'))
+            else:
+                return json_obj
         else:
-            return json_obj
+            raise WeiboRequestError("Weibo API request error: status code: {code} url:{url} ->"
+                                    " method:{method}: data={data}".format(code=response.status_code,
+                                                                           url=response.url,
+                                                                           method=method,
+                                                                           data=data))
 
     def auth_access(self, auth_code):
         """
@@ -177,8 +173,7 @@ class WeiboOauth2(object):
         :param access_token:
         :return: bool
         """
-        data = {"access_token": access_token}
-        result = self.request("post", "revokeoauth2", data)
+        result = self.request("post", "revokeoauth2", data={"access_token": access_token})
         return bool(result.get("result"))
 
     def refresh_token(self, refresh_token):
@@ -230,5 +225,4 @@ class WeiboOauth2(object):
            "expire_in": 157679471
          }
         """
-        data = {"access_token": access_token}
-        return self.request("post", "get_token_info", data=data)
+        return self.request("post", "get_token_info", data={"access_token": access_token})

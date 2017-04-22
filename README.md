@@ -71,13 +71,13 @@ All the modules separated as the parts of the weibo api client to handler data .
 If we want to get the public tweets in recently hours.
 
 ```python
-from weibopy import WeiboTweet
+from weibopy import WeiboClient
 
 access_token = ""
-tweet = WeiboTweet(access_token)
+client = WeiboClient(access_token)
 
 
-result =tweet.public_timeline()
+result =client.get(suffix="statuses/public_timeline.json")
 
 
 {
@@ -138,13 +138,13 @@ How to post a tweet with a picture?
 
 ```python
 
-from weibopy import WeiboTweet
+from weibopy import WeiboClient
 
 access_token = ""
-tweet = WeiboTweet(access_token)
+client = WeiboClient(access_token)
 
 files = {'pic': open('a.png', 'rb')}
-tweet.upload(files=files,status="nihao")
+client.post("statuses/upload.json", data={"status":"nihao"}, files=files)
 ```
 result:
 
