@@ -48,12 +48,12 @@ class WeiboOauth2(object):
         apponweibo        默认的站内应用授权页，授权后不返回access_token，只刷新站内应用父框架。
 
         :param client_id: (required) str,
-        :param client_secret: (required) str, 
+        :param client_secret: (required) str,
         :param redirect_url: (required) str,
         :param scope: (optional) str,
         :param state: (optional) str,
         :param display:  (optional) str,  [default,mobile,wap,client,apponweibo]
-        :param force_login: (optional) bool, default: false 
+        :param force_login: (optional) bool, default: false
         :param language:  (optional) str
         """
         self.client_id = client_id
@@ -68,8 +68,8 @@ class WeiboOauth2(object):
     def authorize_url(self):
         """
         authorization url
-        request weibo authorization url 
-        :return: 
+        request weibo authorization url
+        :return:
         code    string    用于第二步调用oauth2/access_token接口，获取授权后的access token。
         state    string    如果传递参数，会回传该参数
         """
@@ -92,9 +92,9 @@ class WeiboOauth2(object):
     def request(self, method, suffix, data):
         """
         :param method: str, http method ["GET","POST","PUT"]
-        :param suffix: the url suffix 
-        :param data: 
-        :return: 
+        :param suffix: the url suffix
+        :param data:
+        :return:
         """
         url = self.site_url + suffix
         response = self.session.request(method, url, data=data)
