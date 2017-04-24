@@ -58,16 +58,11 @@ If we got the the `access_token`, now we can call api functions.
 
 All the modules separated as the parts of the weibo api client to handler data .
 
-    WeiboOauth2         # weibo Oauth2 
-    WeiboComment        # weibo comment
+    WeiboOauth2         # weibo Oauth2 authentication
+    WeiboClient         # weibo Client API 
     WeiboAPIError       # weibo api error
     WeiboOauth2Error    # weibo oath2 error
-    WeiboRelation       # weibo friends relation
-    WeiboServices       # weibo other services
-    WeiboTweet          # weibo tweet 
-    WeiboUser           # weibo user info
-    WeiboQRCode         # weibo QR code
-
+    
 If we want to get the public tweets in recently hours.
 
 ```python
