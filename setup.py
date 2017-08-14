@@ -31,7 +31,7 @@ setup(
     description="Sina Weibo API SDK",
     long_description=codecs.open("README.md", encoding="utf-8").read(),
     author="Winton Wang",
-    url="https://coding.net/u/wefindx/p/weibopy/git",
+    url="https://github.com/nooperpudd/weibopy",
     license="BSD",
     author_email="365504029@qq.com",
     packages=find_packages(exclude=['*tests*']),
