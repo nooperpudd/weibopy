@@ -35,7 +35,7 @@ setup(
     license="BSD",
     author_email="365504029@qq.com",
     packages=find_packages(exclude=['*tests*']),
-    install_requires=["requests>=2.18.1"],  # todo httpretty compatibility with requests 2.13.0
+    install_requires=["requests>=2.18.1"],
     tests_require=["pytest",
                    "HTTPretty"],
     zip_safe=False,

@@ -1,0 +1,24 @@
+# coverage control
+
+[run]
+branch = true
+source = weibopy
+
+omit=
+    .tox/*
+    docs/*
+    dist/*
+    build/*
+    sample/*
+    tests/*
+
+[report]
+show_missing = true
+
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+    except ImportError:
+
+[html]
+directory = cov_report

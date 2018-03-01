@@ -2,6 +2,10 @@
 
 Weibopy is a weibo python3 sdk, support Python3 with requests packages.
 
+
+[![Build Status](https://travis-ci.org/nooperpudd/weibopy.svg?branch=master)](https://travis-ci.org/nooperpudd/weibopy)
+[pypi]()
+
 [Weibo API doc](http://open.weibo.com/wiki/SDK)
 
 ## Install
