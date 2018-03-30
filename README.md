@@ -148,9 +148,12 @@ client = WeiboClient(access_token)
 files = {'pic': open('a.png', 'rb')}
 client.post("statuses/upload.json", data={"status":"nihao"}, files=files)
 ```
+
 result:
 
-     'biz_feature': 0,
+```
+      {
+     'biz_feature': 0,
      'bmiddle_pic': 'http://wx1.sinaimg.cn/bmiddle/70669a5dly1fescai5ggkj20gf0feq7e.jpg',
      'comments_count': 0,
      'created_at': 'Wed Apr 19 22:06:20 +0800 2017',
