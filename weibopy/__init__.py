@@ -11,4 +11,4 @@ __all__ = [
     "WeiboRequestError"
 ]
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'

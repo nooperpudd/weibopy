@@ -30,6 +30,7 @@ setup(
     version=find_version("weibopy", "__init__.py"),
     description="Sina Weibo API SDK",
     long_description=codecs.open("README.md", encoding="utf-8").read(),
+    long_description_content_type='text/markdown',
     author="Winton Wang",
     url="https://github.com/nooperpudd/weibopy",
     license="BSD",

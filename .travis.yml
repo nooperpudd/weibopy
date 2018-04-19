@@ -1,12 +1,10 @@
-# https://docs.travis-ci.com/
 language: python
 
-sudo: no
+sudo: false
 
 python:
-  - "3.4"
-  - "3.5"
-  - "3.6"
+  - '3.5'
+  - '3.6'
 
 cache: pip
 
@@ -20,6 +18,15 @@ script:
   - py.test -v --cov=weibopy --cov-report xml
 
 after_success:
- # run codecov report
+  # run codecov report
   - codecov -e $TRAVIS_PYTHON_VERSION
 
+deploy:
+  provider: pypi
+  user: nooperpudd
+  password:
+    secure: AuuY5Ora7Qk4n5ZMVVq+BkF7ZQx9xSg9Tj6Ar6tl3ZXa0tPcbzx9honrkp36F8LQcSswN/Ibi+ko3xWoE2NPIQzwzj+EjEZj0U1LTQx2dC+9r6HQhsvOACbyvOdI7X7uAPy6VuXN0On4USsCHomD7jvUD4On3dkNxyxMrzQWC/tu4ds3zWzbeK9qz7lhPzYZX35LnxRfkwCf0XFiJldJGr7dlSLPL9V4rhz/hrACM2JVmcP4N+LCDad43vz0lIvV0wxevZdYm4rCyObhlkxRikuCA0ddvRj5sBBFvp85IkYXWdKNKtpyU4aklruXdguKNQLTMrV6ERRL2dkff9okXYTTDCYcEQL4sC5Js0pr5jmKhB6wWMU8EUHWbchiXNP7ZXQoHmKuoafphS+r+Ygtln9XYcO6t/UpPN258Vg8DUxVTRdM1b3KMwMannomiQvO8VBm+8XWJm5uDQE0xByUKl1ranxTA8BzhjZEd9FCIqSsRzAhjo43PmmxvsPngqGn3WRyj0RIDEPD6ROdGtq0ysji8jLsZq7zkcteSp7BtK0C3BVfqGFpCbcYVHg1Z2AP751IgAE3uFm1ZK2PsQUfcgDxrYuNUxU4OWBNxZfJmcAkBSHAlX+rZ1cFm5ny+ZZhNbSIp/XvyrbyqtVE8Ik5CZ6YZNhVS3vWw0ZwUHlrG9o=
+  distributions: sdist
+  on:
+    tags: true
+    python: '3.6'
