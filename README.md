@@ -8,7 +8,7 @@ Weibopy is a weibo python3 sdk, support Python3 with requests packages.
 [![pypi](https://img.shields.io/pypi/v/weibopy.svg)](https://pypi.python.org/pypi/weibopy)
 [![status](https://img.shields.io/pypi/status/weibopy.svg)](https://pypi.python.org/pypi/weibopy)
 [![pyversion](https://img.shields.io/pypi/pyversions/weibopy.svg)](https://pypi.python.org/pypi/weibopy)
-
+[![Downloads](https://pepy.tech/badge/weibopy)](https://pepy.tech/project/weibopy)
 [Weibo API doc](http://open.weibo.com/wiki/SDK)
 
 ## Install
